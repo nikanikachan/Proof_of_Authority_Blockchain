@@ -1,7 +1,5 @@
-# Unit18_PoA_blockchain
-Unit 18 Homework
-
-Instructions for setting up a private blockchain for the the client.
+# Instructions for setting up a private blockchain for the client.
+Unit_18: Creating a private blockchain using the Proof of Authority consensus algorithm
 
 Prerequisites:
 - Go Ethereum (Geth) installed
@@ -12,7 +10,7 @@ Prerequisites:
 
 ### 1. Get our public key addresses
 
- First we have to create two nodes that will be our sealer addresses. Go the folder where your puppeth application is on your computer and create two nodes with the code below:
+ First we have to create two nodes that will be our sealer addresses. Go the folder where your geth application is on your computer and create two nodes with the code below:
 
 ```
     // Create new nodes
@@ -24,7 +22,7 @@ Remember to take note of the public address that is generated for each node and 
 
 ### 2. Create a Genesis Block
 
-Do the following steps in order in gitbash to create a genesis block. Remeber to run commands in the folder where your puppeth application is. 
+Do the following steps in order in gitbash to create a genesis block. Remeber to run commands in the folder where your geth application is. 
 
 - Run puppeth: `./puppeth`
 - Select a network name to use as your test network. In this example I used "zbanktest1".
