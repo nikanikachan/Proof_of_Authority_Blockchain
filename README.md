@@ -1,7 +1,7 @@
-# Instructions for setting up a private blockchain for the client.
+# Instructions for setting up a Private Blockchain.
 Unit_18: Creating a private blockchain using the Proof of Authority consensus algorithm
 
-Prerequisites:
+## Prerequisites:
 - Go Ethereum (Geth) installed
 - MyCrypto installed
 
