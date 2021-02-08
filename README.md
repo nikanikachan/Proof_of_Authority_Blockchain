@@ -33,13 +33,13 @@ Remember to take note of the public address that is generated for each node and 
 
 Do the following steps in order in gitbash to create a genesis block. Remeber to run commands in the folder where your puppeth application is. 
 
-- run puppeth: `./puppeth`
-- select a network name to use as your test network. In this example I used "zbanktest1".
-- choose Proof of Authority consesus algorithm. This means that only authorized accounts can validate and add blocks to the chain.
-- choose 15 as the number of seconds the blocks should take (15 is the default). This is also referred to as blocktime.
-- The prompt will ask for the accounts that are allowed to seal. Enter the two public addresses generated from step 1.
-- Enter "no" to the precompiling addresses and pref-funding with 1 wei (cleaner for this testnet)
-- specify you chain/network id. Enter any number and take note of it. In this example, I used 128
+- Run puppeth: `./puppeth`
+- Select a network name to use as your test network. In this example I used "zbanktest1".
+- Choose Proof of Authority consesus algorithm. This means that only authorized accounts can validate and add blocks to the chain and this is useful for private networks such as our zbank test network.
+- Choose 15 as the number of seconds the blocks should take (15 is the default). This is also referred to as blocktime which is the time it takes to a produce a new block in the network.
+- Enter the two public addresses generated from step 1 as the accounts you want to seal.
+- Enter "no" to the precompiling addresses and pre-funding with 1 wei (cleaner for this testnet)
+- Specify your chain/network id. Enter any number and take note of it. In this example, I used 128 as my chain ID.
 
 ![Screenshots](Screenshots/gitbash1.png)
 ![Screenshots](Screenshots/gitbash2.png)
@@ -47,7 +47,7 @@ Do the following steps in order in gitbash to create a genesis block. Remeber to
 continue with the following prompts:
 
 - choose "manage existing genesis" : `2`
-- choose "export genesis configurations" . This should create a json file with the network name you chose in your folder. you can ignore the other generated files for now. In this example, this created a zbanktest1.json file which can be seen below.
+- choose "export genesis configurations" . This should create a json file with the network name you chose in your folder. you can ignore the other generated files for now. In this example, this created a zbanktest1.json in my folder. 
 
 The final folder setup should look like this:
 
@@ -55,7 +55,7 @@ The final folder setup should look like this:
 
 ### 3. Initialize the two nodes:
 
-Open a new gitbash screen and start initializing your two nodes by writing the following code.
+Open a new gitbash screen and start initializing your two nodes by writing the following code one after the other.
 
 ```   
     // Initialize
@@ -73,7 +73,7 @@ Open two different gitbash screens, one for each node and write the following co
 ```
 ***Important: Type your password even if you don't see a prompt. After typing it in, you should see an "unlocked" line in the screen. 
 
-In the above lines, we are unlocking our address, and mining for blocks. the rpc flag allows us to connect this node with python. the nodiscover flag prevents the node from getting stuck "looking for peers". Take note of the "enode" section, you will need it for node 2. 
+In the above lines, we are unlocking our address, and mining. the rpc flag allows us to connect this node with python. the nodiscover flag prevents the node from getting stuck "looking for peers". Take note of the "enode" section for node 1, you will need it for node 2. 
 
 ```
     // Node 2 start mining
@@ -81,7 +81,7 @@ In the above lines, we are unlocking our address, and mining for blocks. the rpc
 ```
 ***Important: Type your password even if you don't see a prompt. After typing it in, you should see an "unlocked" line in the screen.
 
-Similar to node 1, we are unlocking node 2 and mining. We are using a different port (30304) because node 1 is using 30303. Again I put the "nodiscover" flag to prevent my node from getting stuck "looking for peers". Both screens should now be mining for blocks now. 
+Similar to node 1, we are unlocking node 2 and mining. We are using a different port (30304) because node 1 is using 30303. We also include the bootnode flag to instruct geth to use our own bootnode using the enode of node1. Again I put the "nodiscover" flag to prevent my node from getting stuck "looking for peers". Both screens should now be mining. 
 
 
 ## Send a Transaction
@@ -102,18 +102,18 @@ Now we can send a test transaction in our test network: zbanktest1. Follow the b
 - Open your mycrypto desktop app, Go to the upper left hand side and select view and send
 - Select "Keystore File"
 - Select "Select Wallet File" then go to the the keystore folder inside your node1 folder.
-- Put in your password for node1 and press Unlock
+- Enter your password for node1 and press Unlock
 
 Since the two gitbash screens were busy mining ETH, your account balance should show a very big number of ETH by now. 
 
 - In the "To Address", put in your node 2's public address.
 - Put in a test amount you would like to send
-- Choose a transaction fee. Note that transactions with higher fees will more likely be picked up by miners than those with lower fees.
+- Choose a transaction fee. Note that transactions with higher fees will more likely be picked up by miners; the higher the transaction fee, the faster the transaction can be completed. 
 - Click on Send Transaction and you should see the following confirmation prompt:
 
 ![Screenshots](Screenshots/confirm.png)
 
-Click on Send and you should see green notification at the bottom with your transactions hash. This hash can be used to track your transaction's progress. Once it has been mined, it should turn from pending to successful.
+Click on Send and you should see a green notification at the bottom with your transaction's hash. This hash can be used to track your transaction's progress. Once it has been mined, it should turn from pending to successful.
 
 ![Screenshots](Screenshots/success.png)
 
@@ -122,7 +122,7 @@ Click on Send and you should see green notification at the bottom with your tran
 
 ### Troubleshooting
 
- If you want to restart your nodes. Do not forget to run the following code first:
+ If you want to restart your nodes. Do not forget to run the following code first before starting your mining. 
 
 ```
     // Remove nodes
