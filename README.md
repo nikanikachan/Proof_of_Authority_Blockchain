@@ -1,17 +1,10 @@
 # Unit18_PoA_blockchain
 Unit 18 Homework
 
-Create a repository, and instructions for launching the chain
-Create a README.md in your project directory and create documentation that explains how to start the network.
-Remember to include any environment setup instructions and dependencies.
-Be sure to include all of the geth flags required to get both nodes to mine and explain what they mean.
-Explain the configuration of the network, such as it's blocktime, chain ID, account passwords, ports, etc.
-Explain how to connect MyCrypto to your network and demonstrate (via screenshots and steps) and send a transaction.
-Upload the code, including the networkname.json and node folders.
-
+Instructions for setting up a private blockchain for the the client.
 
 Prerequisites:
-- puppeth installed
+- Go Ethereum (Geth) installed
 - MyCrypto installed
 
 
