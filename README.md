@@ -17,9 +17,12 @@ Prerequisites:
 
 Setting up a test network
 1. First we have to create two nodes that will be our sealer addresses. Go the folder where your puppeth application is on your computer and create two nodes.
+
+```
     // Create new nodes
     ./geth --datadir node1 account new
     ./geth --datadir node2 account new
+```
 
 Remember to take note of the public address that is generated for each node and the password that you choose. These will be our sealer addresses.
 
@@ -48,20 +51,27 @@ The final folder setup should look like this:
 3. Initialize the two nodes:
 
 Open a new gitbash screen and start initializing your two nodes by writing the following code.
+
+```   
     // Initialize
     ./geth --datadir node1 init zbanktest1.json
     ./geth --datadir node2 init zbanktest1.json
+```
 
 4. Start Mining! Open two different gitbash screens, one for each node and write the following commands (1 screen each)
 
+```
     // Node 1 start mining
     ./geth --datadir node1 --unlock "node1 sealer address" --mine --nodiscover --rpc --allow-insecure-unlock
+```
 ***Important: Type your password even if you don't see a prompt. After typing it in, you should see an "unlocked" line in the screen. 
 
 In the above lines, we are unlocking our address, and mining for blocks. the rpc flag allows us to connect this node with python. the nodiscover flag prevents the node from getting stuck "looking for peers". Take note of the "enode" section, you will need it for node 2. 
 
+```
     // Node 2 start mining
     ./geth --datadir node2 --unlock "node2 sealer address" --mine --port 30304 --bootnodes "enode of node 1" --ipcdisable --allow-insecure-unlock --nodiscover
+```
 ***Important: Type your password even if you don't see a prompt. After typing it in, you should see an "unlocked" line in the screen.
 
 Similar to node 1, we are unlocking node 2 and mining. We are using a different port (30304) because node 1 is using 30303. Again I put the "nodiscover" flag to prevent my node from getting stuck "looking for peers". Both screens should now be mining for blocks now. 
@@ -101,5 +111,7 @@ Click on Send and you should see green notification at the bottom with your tran
 
 7. If you want to restart your nodes. Do not forget to run the following code first:
 
+```
     // Remove nodes
     rm -Rf node1/geth node2/geth
+```
